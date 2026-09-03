@@ -3,8 +3,12 @@ name: Build and Release luci-app-netwiz
 on:
   workflow_dispatch:
     inputs:
+      release_notes:
+        description: '【更新说明】 填写版本更新的具体内容、修复的 Bug 或备注（支持换行，将显示在右上角手动升级的弹窗中）'
+        required: false
+        type: string
       new_version:
-        description: '【修改版本号】例如 1, 1.2, 1.2.3。填入后将更新 Makefile 并保存，不发版；留空则读取当前版本并进行双格式(IPK+APK)发版编译。'
+        description: '【版本控制】 留空: 当前版本发布；输入0: 递增 0.01 修重大Bug版；输入1: 递增 0.1 加新功能版（如1.4.2->1.5.0）；填完整版本号（1.5.3）: 仅改版本不发布。'
         required: false
         type: string
 
@@ -33,29 +37,48 @@ jobs:
           
           if [ -z "$INPUT_VER" ]; then
             # 留空：不修改代码，直接进入编译发版
-            if [ -n "$PKG_REL" ]; then FULL_VER="${PKG_VER}-${PKG_REL}"; else FULL_VER="${PKG_VER}"; fi
+            # 隐藏 -1 发行号
+            FULL_VER="${PKG_VER}"
             echo "pkg_version=$FULL_VER" >> $GITHUB_OUTPUT
             echo "skip_build=false" >> $GITHUB_OUTPUT
             echo "✅ 留空输入，直接读取当前版本 v$FULL_VER 进行编译发版。"
             
-          elif [ "$INPUT_VER" = "0" ] || [ "$INPUT_VER" = "1" ]; then
-            # 输入 0 或 1：自动递增最后一位，保存，并且【进入编译发版】！
-            TARGET_VER=$(echo "$PKG_VER" | awk -F. -v OFS=. '{$NF += 1 ; print}')
-            echo "✅ 自动递增版本号：$PKG_VER -> $TARGET_VER"
+          elif [ "$INPUT_VER" = "0" ]; then
+            # 输入 0：自动递增 0.01 (修订号+1)
+            TARGET_VER=$(echo "$PKG_VER" | awk -F. -v OFS=. '{
+              if(NF==1){print $1".0.1"} else if(NF==2){print $1"."$2".1"} else {$3+=1; for(i=4;i<=NF;i++)$i=0; print}
+            }')
+            echo "✅ 自动递增 0.01 (修订号)：$PKG_VER -> $TARGET_VER"
             
             sed -i "s/^PKG_VERSION:=.*/PKG_VERSION:=$TARGET_VER/g" luci-app-netwiz/Makefile
             git config --local user.email "actions@github.com"
             git config --local user.name "Github Actions"
             git add luci-app-netwiz/Makefile
-            git commit -m "bump version to $TARGET_VER"
+            git commit -m "bump patch version to $TARGET_VER"
             git push
             
-            # 告诉后续步骤【不要跳过】，继续编译发版！
+            echo "pkg_version=$TARGET_VER" >> $GITHUB_OUTPUT
+            echo "skip_build=false" >> $GITHUB_OUTPUT
+
+          elif [ "$INPUT_VER" = "1" ]; then
+            # 输入 1：自动递增 0.1 (次版本号+1，并将修订号强制清零)
+            TARGET_VER=$(echo "$PKG_VER" | awk -F. -v OFS=. '{
+              if(NF==1){print $1".1.0"} else {$2+=1; $3=0; for(i=4;i<=NF;i++)$i=0; print}
+            }')
+            echo "✅ 自动递增 0.1 (次版本号)：$PKG_VER -> $TARGET_VER"
+            
+            sed -i "s/^PKG_VERSION:=.*/PKG_VERSION:=$TARGET_VER/g" luci-app-netwiz/Makefile
+            git config --local user.email "actions@github.com"
+            git config --local user.name "Github Actions"
+            git add luci-app-netwiz/Makefile
+            git commit -m "bump minor version to $TARGET_VER"
+            git push
+            
             echo "pkg_version=$TARGET_VER" >> $GITHUB_OUTPUT
             echo "skip_build=false" >> $GITHUB_OUTPUT
             
           else
-            # 输入了具体的版本号 (例如 1.5.0)：只更新代码，【不发版】
+            # 输入了具体的版本号 (例如 1.5.3)：只更新代码，【不发版】
             TARGET_VER="$INPUT_VER"
             echo "✅ 检测到指定版本号，准备更新至：$TARGET_VER (本次不发版)"
             
@@ -71,7 +94,8 @@ jobs:
           fi
 
   build:
-    name: Compile IPK & APK
+    # 23.05 系统则显示 IPK，否则（如 snapshot 或新版）显示 APK
+    name: Compile ${{ contains(matrix.sdk_version, '23.05') && 'IPK' || 'APK' }} (${{ matrix.sdk_version }})
     needs: prepare
     if: needs.prepare.outputs.skip_build != 'true'
     runs-on: ubuntu-22.04
@@ -98,21 +122,21 @@ jobs:
           chmod +x luci-app-netwiz/root/usr/libexec/netwiz-monitor-loop.sh
           chmod +x luci-app-netwiz/root/etc/init.d/netwiz-monitor
           chmod +x luci-app-netwiz/root/etc/init.d/netwiz-recovery
+          chmod +x luci-app-netwiz/root/etc/init.d/netwiz-watchdog
           chmod +x luci-app-netwiz/root/etc/hotplug.d/dhcp/99-netwiz-guard
           
           # 自动提取版本号并注入前端 js (循环处理多个文件)
           echo "🏷️ 准备将版本号 v${{ needs.prepare.outputs.pkg_version }} 注入前端..."
           
-          for JS_FILE in "luci-app-netwiz/htdocs/luci-static/resources/view/netwiz.js" "luci-app-netwiz/htdocs/luci-static/resources/view/netwiz_dev.js"; do
+          for JS_FILE in "luci-app-netwiz/htdocs/luci-static/resources/view/netwiz_tmpl.js" "luci-app-netwiz/htdocs/luci-static/resources/view/netwiz_dev.js"; do
             if [ -f "$JS_FILE" ]; then
               echo "✅ 找到目标文件: $JS_FILE"
-              grep "{{APP_VERSION}}" "$JS_FILE" || echo "⚠️ 警告：该文件中没有找到 {{APP_VERSION}} 占位符！"
               
-              # 执行替换
-              sed -i "s/{{APP_VERSION}}/v${{ needs.prepare.outputs.pkg_version }}/g" "$JS_FILE"
+              # 使用正则表达式强制替换 APP_VERSION 键值对
+              sed -i "s/'APP_VERSION':[ \t]*'.*'/'APP_VERSION': 'v${{ needs.prepare.outputs.pkg_version }}'/g" "$JS_FILE"
               
               echo "✅ 注入后状态："
-              grep "nw-version-tag" "$JS_FILE" || true
+              grep "'APP_VERSION'" "$JS_FILE" || true
             else
               echo "❌ 找不到目标 JS 文件: $JS_FILE ！请检查路径。"
               exit 1
@@ -163,11 +187,17 @@ jobs:
           tag_name: v${{ needs.prepare.outputs.pkg_version }}
           name: "Netwiz 网络设置向导 v${{ needs.prepare.outputs.pkg_version }} 发布"
           body: |
+         
+            ### ✨ 最新版发布
+            ${{ inputs.release_notes || '🚀 Routine Update: Optimized underlying code, improved system stability and compatibility, and fixed known issues.<br>🚀 常规更新：优化底层代码，提升系统稳定性与兼容性，修复已知问题。' }}
+            
+            ---
+            
             ### 🚀 全平台一键极速安装
             请使用 SSH 登录路由器终端，直接复制并运行下方代码：
             
             ```bash
-            wget -qO- https://raw.githubusercontent.com/${{ github.repository }}/master/install.sh | sh
+            if wget -qO /tmp/nw_inst.sh https://raw.githubusercontent.com/${{ github.repository }}/master/install.sh; then sh /tmp/nw_inst.sh; else sh /etc/netwiz/custom_pkgs/install.sh; fi
             ```
 
             ### 新版 25.x 由于签名限制，网页直接上传会报 Error 99 错误，请使用上方的命令行安装

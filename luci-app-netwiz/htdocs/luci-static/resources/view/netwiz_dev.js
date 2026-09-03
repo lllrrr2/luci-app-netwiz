@@ -27,9 +27,9 @@ var T = {
     'TAB_DEPT_OTHER': _('Uncategorized'),
     'LBL_SMART_FILTER': _('Filter by IP Subnet'),
     'TIP_SMART_FILTER': _('Checked: Classify device types by IP subnet') + '\n' + _('Unchecked: Classify device types by built-in names'),
-    'PH_DEPT_NAME': _('Group Name'),
+    'PH_DEPT_NAME': _('Alias'),
     'TXT_GROUP_PREFIX': _('Group '),
-    'ERR_SAVE_RPC': _('❌ Save Failed!') + '\n' + _('Reason: RPC interface unresponsive ({err})') + '\n' + _('Please run this command in router SSH to restart the service: /etc/init.d/rpcd restart'),
+    'ERR_SAVE_RPC': '❌ ' + _('Save Failed!') + '\n' + _('Reason: RPC interface unresponsive ({err})') + '\n' + _('Please run this command in router SSH to restart the service: /etc/init.d/rpcd restart'),
     'LBL_SELECT_ALL': _('Select all available devices'),
     'TXT_SELECTED': _('Selected'),
     'TXT_ITEMS': _('items'),
@@ -92,16 +92,16 @@ var T = {
     'BTN_START_ASSIGN': _('Start Assign'),
     'MSG_RADAR_AVOID': _('Avoiding conflicts and silently writing rules...'),
     'MSG_NO_DEVS': _('No device records found in current LAN'),
-    'MSG_SCAN_FAIL': _('❌ Scan failed: Cannot retrieve underlying data'),
-    'ERR_POOL_FULL': _('❌ The IP pool for this type is full. Please expand the range or choose another strategy!'),
+    'MSG_SCAN_FAIL': '❌ ' + _('Scan failed: Cannot retrieve underlying data'),
+    'ERR_POOL_FULL': '❌ ' + _('The IP pool for this type is full. Please expand the range or choose another strategy!'),
     'ERR_IP_EMPTY': _('IP address cannot be empty!'),
-    'ERR_IP_CONFLICT': _('❌ IP Conflict Blocked!') + '\n\n' + _('The IP [{ip}] is occupied by device [{name}].') + '\n' + _('Please modify the strategy or enter a free IP!'),
-    'TIP_NO_CHANGE': _('💡 Tip: The device is already fixed at this IP. No changes needed!'),
-    'TIP_ALL_UNBOUND': _('💡 Tip: The {count} selected devices are all [Unbound]. No unbind action needed!'),
+    'ERR_IP_CONFLICT': '❌ ' + _('IP Conflict Blocked!') + '\n\n' + _('The IP [{ip}] is occupied by device [{name}].') + '\n' + _('Please modify the strategy or enter a free IP!'),
+    'TIP_NO_CHANGE': '💡 ' + _('Tip: The device is already fixed at this IP. No changes needed!'),
+    'TIP_ALL_UNBOUND': '💡 ' + _('Tip: The {count} selected devices are all [Unbound]. No unbind action needed!'),
     'ERR_SUF_RANGE': _('Starting suffix must be between 2 and 254!'),
-    'ERR_POOL_INSUFF': _('❌ IP pool insufficient!') + '\n' + _('Only {avail} IPs left from .{suf}, but {count} devices selected.'),
-    'ERR_CAT_FAIL': _('❌ [{name}] assignment failed!') + '\n' + _('Selected {req} devices, but only {avail} IPs available in the preset range.') + '\n' + _('Please expand the IP range for this category!'),
-    'TIP_BATCH_NO_CHANGE': _('💡 Smart block: According to your strategy, the {count} selected devices are already fixed with unchanged IPs. No need to rewrite rules!'),
+    'ERR_POOL_INSUFF': '❌ ' + _('IP pool insufficient!') + '\n' + _('Only {avail} IPs left from .{suf}, but {count} devices selected.'),
+    'ERR_CAT_FAIL': '❌ ' + _('[{name}] assignment failed!') + '\n' + _('Selected {req} devices, but only {avail} IPs available in the preset range.') + '\n' + _('Please expand the IP range for this category!'),
+    'TIP_BATCH_NO_CHANGE': '💡 ' + _('Smart block: According to your strategy, the {count} selected devices are already fixed with unchanged IPs. No need to rewrite rules!'),
     'TXT_INFINITE': _('Infinite'),
     'TXT_EXPIRED': _('Expired'),
     'STRAT_DEPT': _('Group IP Pool'),
@@ -109,14 +109,14 @@ var T = {
     'STRAT_DEPT_DESC': _('Assign free IPs automatically from the selected Target Group\'s specific IP range'),
     'TIT_MGR_DEPTS': _('Department Network Segments'),
     'BTN_ADD_DEPT': _('+ Add New Department'),
-    'ERR_DEPT_OVERLAP': _('❌ Subnet Conflict: IP ranges between groups cannot overlap!') + '\n' + _('Conflicting groups: {groups}'),
-    'ERR_DEPT_NAME_DUP': _('❌ Save Failed: Group names cannot be duplicated!') + '\n' + _('Duplicate name: {name}'),
-    'ERR_DEPT_INVALID': _('❌ Save Failed: IPs must be between 2-254 and format must be valid!'),
-    'ERR_DEPT_POOL_FULL': _('❌ IP pool reached the end (254). Cannot auto-append. Please arrange subnets manually!'),
-    'ERR_DEPT_FULL': _('❌ The IP pool for the selected department is full! Please expand the range.'),
+    'ERR_DEPT_OVERLAP': '❌ ' + _('Subnet Conflict: IP ranges between groups cannot overlap!') + '\n' + _('Conflicting groups: {groups}'),
+    'ERR_DEPT_NAME_DUP': '❌ ' + _('Save Failed: Group names cannot be duplicated!') + '\n' + _('Duplicate name: {name}'),
+    'ERR_DEPT_INVALID': '❌ ' + _('Save Failed: IPs must be between 2-254 and format must be valid!'),
+    'ERR_DEPT_POOL_FULL': '❌ ' + _('IP pool reached the end (254). Cannot auto-append. Please arrange subnets manually!'),
+    'ERR_DEPT_FULL': '❌ ' + _('The IP pool for the selected department is full! Please expand the range.'),
     'LBL_TARGET_GROUP': _('Assign to Group (Optional)'),
     'OPT_NO_GROUP': _('-- Uncategorized (None) --'),
-    'ERR_DEPT_NOT_SEL': _('❌ Strategy Error: Please select a Target Group first to allocate IPs from its pool!'),
+    'ERR_DEPT_NOT_SEL': '❌ ' + _('Strategy Error: Please select a Target Group first to allocate IPs from its pool!'),
     'TIT_FW_CONTROL': _('Firewall & Access Control'),
     'BDG_FW_BLK': _('Net Blocked'),
     'BDG_FW_ISO': _('Isolated'),
@@ -125,31 +125,31 @@ var T = {
     'TIP_SHOW_CONNS': _('Monitor real-time connections (Auto turn off in 3 mins)'),
     'LBL_CONN_COUNT': _('Conns'),
     'TXT_FW_PANEL_TITLE': _('Manage device network access anytime, anywhere'),
-    'LBL_FW_BLK_TITLE': _('⛔ Block Internet (WAN)'),
+    'LBL_FW_BLK_TITLE': '⛔ ' + _('Block Internet (WAN)'),
     'LBL_FW_BLK_DESC': _('Instantly cut off internet access. LAN communication remains normal.'),
-    'LBL_FW_ISO_TITLE': _('🛡️ LAN Isolation (Anti-snooping)'),
+    'LBL_FW_ISO_TITLE': '🛡️ ' + _('LAN Isolation (Anti-snooping)'),
     'LBL_FW_ISO_DESC': _('Block internal network access for this device to prevent scanning and privacy leaks.'),
-    'LBL_FW_DMZ_TITLE': _('🚀 DMZ Host (Expose to WAN)'),
+    'LBL_FW_DMZ_TITLE': '🚀 ' + _('DMZ Host (Expose to WAN)'),
     'LBL_FW_DMZ_DESC': _('Forward all WAN ports to this device. Only one device allowed.'),
     'TIP_MAC_CTRL': _('Click to control access'),
-    'ERR_DMZ_NO_IP': _('❌ Cannot enable DMZ: Device has no valid IP or is offline!'),
-    'ERR_DMZ_OCCUPIED_1': _('❌ Denied! Only one DMZ host allowed.') + '\n\n' + _('Device [ '),
-    'ERR_DMZ_OCCUPIED_2': _(' ] is currently the DMZ.') + '\n' + _('Please disable its DMZ first!'),
-    'ERR_FW_SAVE_FAIL': _('❌ Save failed!') + '\n\n' + _('Reason: RPC Error ({err}).') + '\n' + _('Please run `/etc/init.d/rpcd restart` in SSH and try again!'),
-    'ERR_SAVE_FAIL_SHORT': _('❌ Save failed!') + '\n' + _('Reason: {err}') + '\n' + _('Please run `/etc/init.d/rpcd restart` in SSH'),
-    'ERR_IP_FORMAT': _('❌ Invalid IP format! Please enter a valid IPv4 address (e.g., 192.168.1.50)'),
+    'ERR_DMZ_NO_IP': '❌ ' + _('Cannot enable DMZ: Device has no valid IP or is offline!'),
+    'ERR_DMZ_OCCUPIED_1': '❌ ' + _('Denied! Only one DMZ host allowed.') + '\n\n' + _('Device ['),
+    'ERR_DMZ_OCCUPIED_2': _('] is currently the DMZ.') + '\n' + _('Please disable its DMZ first!'),
+    'ERR_FW_SAVE_FAIL': '❌ ' + _('Save failed!') + '\n\n' + _('Reason: RPC Error ({err}).') + '\n' + _('Please run `/etc/init.d/rpcd restart` in SSH and try again!'),
+    'ERR_SAVE_FAIL_SHORT': '❌ ' + _('Save failed!') + '\n' + _('Reason: {err}') + '\n' + _('Please run `/etc/init.d/rpcd restart` in SSH'),
+    'ERR_IP_FORMAT': '❌ ' + _('Invalid IP format! Please enter a valid IPv4 address (e.g., 192.168.1.50)'),
     'TIP_V6_COPY': _('Public IPv6 (Click to copy):'),
     'MSG_V6_COPIED': _('First IPv6 address copied successfully:'),
     'BTN_EXPORT_DEPTS': _('Export Groups'),
     'BTN_IMPORT_DEPTS': _('Import Groups'),
-    'MSG_IMPORT_SUCCESS': _('✅ Import successful!') + '\n' + _('Please verify and click [Save] below to apply.'),
-    'ERR_IMPORT_FAIL': _('❌ Import failed!') + '\n' + _('Invalid or corrupted file format. Please select a valid JSON backup file.'),
+    'MSG_IMPORT_SUCCESS': '✅ ' + _('Import successful!') + '\n' + _('Please verify and click [Save] below to apply.'),
+    'ERR_IMPORT_FAIL': '❌ ' + _('Import failed!') + '\n' + _('Invalid or corrupted file format. Please select a valid JSON backup file.'),
     'BDG_NEW_UNKNOWN': _('Suspected Spoofed Device'),
     'BTN_RESET_ALL': _('Factory Reset'),
-    'TIT_RESET_ALL': _('⚠️ Danger: Restore Default Network'),
+    'TIT_RESET_ALL': '⚠️ ' + _('Danger: Restore Default Network'),
     'MSG_RESET_CONFIRM': _('Are you sure you want to clear all static IPs and firewall rules set by Netwiz?<br><br><span style="color:#ef4444; font-weight:bold;">This operation will delete all groups, blacklists, isolations, and DMZ settings, and restart network services.</span>'),
     'MSG_RESETTING': _('Cleaning up and restarting network services...'),
-    'TIT_CONN_RADAR': _('⚡ Connection Radar Analysis'),
+    'TIT_CONN_RADAR': '⚡ ' + _('Connection Radar Analysis'),
     'MSG_DIVE_KERNEL': _('Diving into system kernel to capture connection records...'),
     'LBL_CONN_WEB': _('Web/HTTPS'),
     'LBL_CONN_DNS': _('DNS/NTP'),
@@ -163,28 +163,28 @@ var T = {
     'MSG_CONN_ANALYZE_FAIL': _('Analysis failed: {err}'),
     'BTN_EXPORT_NET': _('Export Config'),
     'BTN_IMPORT_NET': _('Import Config'),
-    'TIT_EXPORT_ING': _('📦 Packing Network Config'),
+    'TIT_EXPORT_ING': '📦 ' + _('Packing Network Config'),
     'MSG_EXPORT_ING': _('<div style="text-align:center; padding:20px; color:#64748b;"><div class="nd-spinner" style="margin:0 auto 15px auto;"></div>Generating exclusive backup file<br><br><span style="font-size:12px;">(Includes: WAN, Wi-Fi, IPv6, Bypass, Static IPs & Firewall rules)</span></div>'),
     'BTN_PLEASE_WAIT': _('Please wait...'),
-    'TIT_EXPORT_OK': _('✅ Export Successful'),
+    'TIT_EXPORT_OK': '✅ ' + _('Export Successful'),
     'MSG_EXPORT_OK': _('Core network configuration file has been successfully downloaded!'),
     'BTN_CLOSE': _('Close'),
-    'TIT_EXPORT_FAIL': _('❌ Export Failed'),
+    'TIT_EXPORT_FAIL': '❌ ' + _('Export Failed'),
     'MSG_EXPORT_FAIL_NODATA': _('Backend returned no valid data'),
     'MSG_EXPORT_FAIL_ERR': _('Error occurred: '),
-    'TIT_IMPORT_CONFIRM': _('⚠️ Confirm Overwrite?'),
-    'MSG_IMPORT_CONFIRM': _('<span style="color:#ef4444; font-weight:bold;">About to overwrite the router\'s core network settings!</span><br><br><span style="font-size:12.5px; color:#ef4444;">💡 <b>Safety Mechanism:</b> The system will automatically backup the current state to the <code style="background:#10b981; padding:2px 4px; border-radius:4px;">/root/netwiz_bak/</code> directory before importing.</span><br><br>Network services will <b>automatically restart</b> after import, which may cause brief Wi-Fi/LAN disconnection. Please confirm.'),
+    'TIT_IMPORT_CONFIRM': '⚠️ ' + _('Confirm Overwrite?'),
+    'MSG_IMPORT_CONFIRM': _('<span style="color:#ef4444; font-weight:bold;">About to overwrite the router\'s core network settings!</span><br><br><span style="font-size:12.5px; color:#ef4444;">') + '💡 ' + _('<b>Safety Mechanism:</b> The system will automatically backup the current state to the <code style="background:#10b981; padding:2px 4px; border-radius:4px;">/root/netwiz_bak/</code> directory before importing.</span><br><br>Network services will <b>automatically restart</b> after import, which may cause brief Wi-Fi/LAN disconnection. Please confirm.'),
     'BTN_CONFIRM_IMPORT': _('Confirm & Apply'),
     'MSG_IMPORT_RESTARTING': _('Writing configuration and restarting network services,<br><b>Please wait...</b> Network may disconnect briefly, taking about 10-25 seconds...'),
-    'TIT_RESTORE_NET': _('⬆️ Restore Network Config'),
+    'TIT_RESTORE_NET': '⬆️ ' + _('Restore Network Config'),
     'MSG_READING_BAK': _('<div style="text-align:center; padding:20px; color:#64748b;"><div class="nd-spinner" style="margin:0 auto 15px auto;"></div>Reading router backup records...</div>'),
     'OPT_NO_BAK': _('[ No history backups found ]'),
-    'LBL_RESTORE_ROUTER': _('📂 Restore from Router History'),
-    'BTN_RESTORE_SEL': _('⬇️ Restore Selected Backup'),
+    'LBL_RESTORE_ROUTER': '📂 ' + _('Restore from Router History'),
+    'BTN_RESTORE_SEL': '⬇️ ' + _('Restore Selected Backup'),
     'TXT_OR': _('— OR —'),
-    'LBL_RESTORE_PC': _('💻 Upload from Local PC'),
-    'BTN_BROWSE_PC': _('📁 Browse PC Files...'),
-    'TIT_READ_FAIL': _('❌ Read Failed'),
+    'LBL_RESTORE_PC': '💻 ' + _('Upload from Local PC'),
+    'BTN_BROWSE_PC': '📁 ' + _('Browse PC Files...'),
+    'TIT_READ_FAIL': '❌ ' + _('Read Failed'),
     'MSG_READ_FAIL': _('Unable to fetch router backup list.'),
     'TXT_BAK_AUTO': _('Auto Backup'),
     'TXT_BAK_IMPORT': _('Before Import'),
@@ -199,8 +199,7 @@ var T = {
     'MSG_WOL_SENT_2': _('(Device booting may take a minute)'),
     'TIT_FILE_LARGE': _('File Too Large'),
     'MSG_FILE_LARGE': _('<div style="text-align:left; color:#ef4444; font-weight:bold;">Backup files are usually under 1MB!</div><br>The selected file is too large and has been blocked. Please ensure you didn\'t select the wrong file (e.g., firmware or video).'),
-    'TIT_RESTORE_NET': _('Restore Network Config'),
-    'MSG_RESTORE_NET_CONFIRM': _('This action will overwrite the existing network configuration and restart the network.<br><br><span style="color:#f59e0b; font-weight:bold;">⚠️ Security Warning: Do not upload backups from unknown sources to prevent router hijacking.</span><br><br>Confirm restore?'),
+    'MSG_RESTORE_NET_CONFIRM': _('This action will overwrite the existing network configuration and restart the network.<br><br><span style="color:#f59e0b; font-weight:bold;">') + '⚠️ ' + _('Security Warning: Do not upload backups from unknown sources to prevent router hijacking.</span><br><br>Confirm restore?'),
     'TIT_RESTORING': _('Restoring'),
     'TIT_RESTORE_FAIL': _('Restore Failed'),
     'TXT_ERROR': _('Error: '),
@@ -210,26 +209,31 @@ var T = {
     'MSG_JSON_INVALID': _('The uploaded file is not a valid JSON format and cannot be parsed!'),
     'TIT_RESTORE_JSON': _('Import Configuration'),
     'MSG_RESTORE_JSON': _('Are you sure you want to import this configuration? Existing data will be overwritten.'),
-    'V6_NAT_ERR_TIT1': _('🚨 Severe Network Topology Conflict!'),
-    'V6_NAT_ERR_MSG1': _('System detected that IPv6 and LAN "Masquerading (NAT)" are <b>BOTH enabled</b>!This will paralyze IPv6 allocation and cause routing loops.<br>👉 <b>Fix:</b> Please go to <code>Network -> Firewall</code> to disable LAN Masquerading, or <b style="color:#ef4444;">Disable IPv6</b> in the LAN settings on the Netwiz homepage.'),
+    'V6_NAT_ERR_TIT1': '🚨 ' + _('Severe Network Topology Conflict!'),
+    'V6_NAT_ERR_MSG1': _('System detected that IPv6 and LAN "Masquerading (NAT)" are <b>BOTH enabled</b>!This will paralyze IPv6 allocation and cause routing loops.<br>') + '👉 ' + _('<b>Fix:</b> Please go to <code>Network -> Firewall</code> to disable LAN Masquerading, or <b style="color:#ef4444;">Disable IPv6</b> in the LAN settings on the Netwiz homepage.'),
     'TIT_RESTORE_DATA': _('Restore Device Data'),
-    'MSG_RESTORE_CONFIRM': _('This action will overwrite existing device groups and static IP bindings, and restart the network.<br><br><span style="color:#f59e0b; font-weight:bold;">⚠️ Security Warning: Do not upload backups from unknown sources to prevent DNS hijacking.</span><br><br>Confirm to restore?'),
+    'MSG_RESTORE_CONFIRM': _('This action will overwrite existing device groups and static IP bindings, and restart the network.<br><br><span style="color:#f59e0b; font-weight:bold;">') + '⚠️ ' + _('Security Warning: Do not upload backups from unknown sources to prevent DNS hijacking.</span><br><br>Confirm to restore?'),
     'TXT_SUCCESS': _('Success'),
     'TXT_WARNING': _('Warning'),
     'TXT_WAKING_UP': _('Waking up...'),
     'TIP_LOCAL_V6': _('Displaying self-assigned local IPv6 as IPv4 is unavailable'),
     'BDG_LOCAL_V6': _('Local IPv6'),
+    'LBL_FW_EXPOSE_TITLE': '🌍 ' + _('Direct WAN Access (Whitelist)'),
+    'LBL_FW_EXPOSE_DESC': _('Open firewall to allow direct external access to this device.'),
+    'OPT_PROTO_V6': _('IPv6 Only'),
+    'OPT_PROTO_V4': _('IPv4 Only'),
+    'OPT_PROTO_ALL': _('IPv4 + IPv6'),
 };
 
 var callDeviceList = rpc.declare({ object: 'netwiz_dev', method: 'get_list', params: ['show_conns', 'do_rescan'], expect: { '': {} } });
 var callWakeDevice = rpc.declare({ object: 'netwiz_dev', method: 'wake_device', params: ['mac'], expect: { result: 0 } });
-var callFwSet = rpc.declare({ object: 'netwiz_dev', method: 'fw_set', params: ['mac', 'ip', 'blk_en', 'iso_en', 'dmz_en'], expect: { result: 0 } });
+var callFwSet = rpc.declare({ object: 'netwiz_dev', method: 'fw_set', params: ['mac', 'ip', 'blk_en', 'iso_en', 'dmz_en', 'expose_en', 'expose_proto'], expect: { result: 0 } });
 var callDeviceBind = rpc.declare({ object: 'netwiz_dev', method: 'bind', params: ['mac', 'ip', 'name', 'dept', 'no_reload'], expect: { result: 0 } });
 var callDeviceUnbind = rpc.declare({ object: 'netwiz_dev', method: 'unbind', params: ['mac', 'no_reload'], expect: { result: 0 } });
 var callApplyDhcp = rpc.declare({ object: 'netwiz_dev', method: 'apply_dhcp', expect: { result: 0 } });
 var callGetDepts = rpc.declare({ object: 'netwiz_dev', method: 'get_depts', expect: { depts: [] } });
 var callSaveDepts = rpc.declare({ object: 'netwiz_dev', method: 'save_depts', params: ['data'], expect: { result: 0 } });
-var callV6KeepAlive = rpc.declare({ object: 'netwiz_dev', method: 'v6_keep_alive', params: ['mac'], expect: { result: 0 } });
+var callV6KeepAlive = rpc.declare({ object: 'netwiz_dev', method: 'v6_keep_alive', params: ['mac', 'name'], expect: { result: 0 } });
 
 var callGetSmartRanges = rpc.declare({ object: 'netwiz_dev', method: 'get_smart_ranges', expect: { ranges: {} } });
 var callSaveSmartRanges = rpc.declare({ object: 'netwiz_dev', method: 'save_smart_ranges', params: ['data'], expect: { result: 0 } });
@@ -375,22 +379,40 @@ return view.extend({
             '               <div id="fw-reset-gear" title="{{TIT_RESET_ALL}}" style="cursor:pointer; font-size:18px; filter:grayscale(100%); opacity:0.4; transition:all 0.3s;" onmouseover="this.style.filter=\'none\'; this.style.opacity=1; this.style.transform=\'rotate(90deg)\'" onmouseout="this.style.filter=\'grayscale(100%)\'; this.style.opacity=0.4; this.style.transform=\'none\'">⚙️</div>',
             '           </div>',
             '           <div style="background:#f8fafc; margin:10px;  padding:15px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:15px;">',
+            
+            '               <div class="nw-switch-row-padded" style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed #cbd5e1; padding-bottom:15px; margin-bottom:15px;">',
+            '                   <div style="flex:1; padding-right:5px;">',
+            '                       <div style="font-size:15.5px; font-weight:bold; color:#10b981; margin-bottom:5px;">{{LBL_FW_EXPOSE_TITLE}}</div>',
+            '                       <div style="font-size:13px; color:#64748b; line-height:1.4;">{{LBL_FW_EXPOSE_DESC}}</div>',
+            '                   </div>',
+            '                   <div style="display:flex; flex-direction:row; align-items:center; gap:12px;">',
+            '                       <select id="fw-expose-proto" class="nd-input" style="padding: 2px 0px !important; font-size:12px; height:26px; width:auto; min-width:80px; text-align:center; cursor:pointer; background-color:#f8fafc; margin:0;">',
+            '                           <option value="ipv6">{{OPT_PROTO_V6}}</option>',
+            '                           <option value="ipv4">{{OPT_PROTO_V4}}</option>',
+            '                           <option value="any">{{OPT_PROTO_ALL}}</option>',
+            '                       </select>',
+            '                       <label class="nw-switch" style="width:42px; height:22px; flex-shrink:0; cursor:pointer; margin:0; display:block;"><input type="checkbox" id="fw-expose-en"><span class="nw-slider"></span></label>',
+            '                   </div>',
+            '               </div>',
+            
             '               <label class="nw-switch-row-padded" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed #cbd5e1; padding-bottom:15px; margin-bottom:15px;">',
-            '                   <div style="flex:1; padding-right:15px;">',
+            '                   <div style="flex:1; padding-right:5px;">',
             '                       <div style="font-size:15.5px; font-weight:bold; color:#ef4444; margin-bottom:5px;">{{LBL_FW_BLK_TITLE}}</div>',
             '                       <div style="font-size:13px; color:#64748b; line-height:1.4;">{{LBL_FW_BLK_DESC}}</div>',
             '                   </div>',
             '                   <div class="nw-switch" style="width:42px; height:22px; flex-shrink:0;"><input type="checkbox" id="fw-blk-en"><span class="nw-slider"></span></div>',
             '               </label>',
+            
             '               <label class="nw-switch-row-padded" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; border-bottom:1px dashed #cbd5e1; padding-bottom:15px; margin-bottom:15px;">',
-            '                   <div style="flex:1; padding-right:15px;">',
+            '                   <div style="flex:1; padding-right:5px;">',
             '                       <div style="font-size:15.5px; font-weight:bold; color:#d97706; margin-bottom:5px;">{{LBL_FW_ISO_TITLE}}</div>',
             '                       <div style="font-size:13px; color:#64748b; line-height:1.4;">{{LBL_FW_ISO_DESC}}</div>',
             '                   </div>',
             '                   <div class="nw-switch" style="width:42px; height:22px; flex-shrink:0;"><input type="checkbox" id="fw-iso-en"><span class="nw-slider"></span></div>',
             '               </label>',
+            
             '               <label class="nw-switch-row-padded" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; border:none; padding-bottom:0; margin-bottom:0;">',
-            '                   <div style="flex:1; padding-right:15px;">',
+            '                   <div style="flex:1; padding-right:5px;">',
             '                       <div style="font-size:15.5px; font-weight:bold; color:#8b5cf6; margin-bottom:5px;">{{LBL_FW_DMZ_TITLE}}</div>',
             '                       <div style="font-size:13px; color:#64748b; line-height:1.4;">{{LBL_FW_DMZ_DESC}}</div>',
             '                   </div>',
@@ -1028,12 +1050,17 @@ return view.extend({
                 var chkBlk = modalOverlay.querySelector('#fw-blk-en');
                 var chkIso = modalOverlay.querySelector('#fw-iso-en');
                 var chkDmz = modalOverlay.querySelector('#fw-dmz-en');
+                var chkExpose = modalOverlay.querySelector('#fw-expose-en');
+                var selExposeProto = modalOverlay.querySelector('#fw-expose-proto');
+                
                 if (chkBlk) chkBlk.checked = (d.fw_block === 'true' || d.fw_block === true);
                 if (chkIso) chkIso.checked = (d.fw_isolate === 'true' || d.fw_isolate === true);
                 if (chkDmz) {
                     chkDmz.checked = (d.fw_dmz === 'true' || d.fw_dmz === true);
                     chkDmz.dataset.orig = chkDmz.checked; // 记住初始状态
                 }
+                if (chkExpose) chkExpose.checked = (d.fw_expose === 'true' || d.fw_expose === true);
+                if (selExposeProto) selExposeProto.value = d.fw_expose_proto || 'ipv6';
             } else if (options.showForm) {
                 mForm.style.display = 'block'; 
                 populateTagSelects();
@@ -1080,6 +1107,8 @@ return view.extend({
                     var isoEn = modalOverlay.querySelector('#fw-iso-en') ? modalOverlay.querySelector('#fw-iso-en').checked : false;
                     var dmzEl = modalOverlay.querySelector('#fw-dmz-en');
                     var dmzEn = dmzEl ? dmzEl.checked : false;
+                    var exposeEn = modalOverlay.querySelector('#fw-expose-en') ? modalOverlay.querySelector('#fw-expose-en').checked : false;
+                    var exposeProto = modalOverlay.querySelector('#fw-expose-proto') ? modalOverlay.querySelector('#fw-expose-proto').value : 'ipv6';
                     
                     // DMZ校验
                     if (dmzEn && dmzEl.dataset.orig !== 'true') {
@@ -1093,7 +1122,7 @@ return view.extend({
                         }
                     }
 
-                    if (options.onOk) options.onOk({ mac: fwCurrentMac, ip: fwCurrentIp, blk_en: blkEn, iso_en: isoEn, dmz_en: dmzEn });
+                    if (options.onOk) options.onOk({ mac: fwCurrentMac, ip: fwCurrentIp, blk_en: blkEn, iso_en: isoEn, dmz_en: dmzEn, expose_en: exposeEn, expose_proto: exposeProto });
                     modalOverlay.style.display = 'none';
                     if (typeof floatBar !== 'undefined' && floatBar) floatBar.style.removeProperty('display');
                 } else if (options.showForm) {
@@ -1224,23 +1253,24 @@ return view.extend({
 
             // 没到并发上限，且队列里还有任务，执行
             while (window.nwKeepAliveQueue.length > 0 && window.nwActiveCount < MAX_CONCURRENT) {
-                window.nwActiveCount++; // 占位：活跃任务数 +1
-                var mac = window.nwKeepAliveQueue.shift(); // 取出 MAC
+                window.nwActiveCount++; 
+                // 取出对象的方式
+                var item = window.nwKeepAliveQueue.shift(); 
 
-                // 锁定当前的 mac，防止污染
-                (function(currentMac) {
-                    callV6KeepAlive(currentMac).then(function() {
-                        sessionStorage.setItem('nw_v6_hb_' + currentMac, 'sent'); 
+                // 传入的参数，将对象解析为 mac 和 name
+                (function(curr) {
+                    callV6KeepAlive(curr.mac, curr.name).then(function() {
+                        // 成功，名字指纹已经在触发时记录过了，什么都不用做
                     }).catch(function() {
-                        // 失败忽略
+                        // 如果请求因为网络等原因失败了，删掉它的防刷缓存，允许它下一次重试
+                        sessionStorage.removeItem('nw_v6_hb_' + curr.mac);
                     }).finally(function() {
-                        // 延时 200 毫秒后释放槽位
                         setTimeout(function() {
-                            window.nwActiveCount--; // 释放活跃任务数 -1
-                            processKeepAliveQueue(); // 继续
+                            window.nwActiveCount--; 
+                            processKeepAliveQueue(); 
                         }, 200); 
                     });
-                })(mac);
+                })(item);
             }
         }
 
@@ -1587,10 +1617,13 @@ return view.extend({
                         }
 
                         var triggerKeepAlive = function() {
-                            var hasSent = sessionStorage.getItem(hbKey);
-                            if (!hasSent && window.nwKeepAliveQueue.indexOf(dev.mac) === -1) { 
-                                sessionStorage.setItem(hbKey, 'pending'); 
-                                window.nwKeepAliveQueue.push(dev.mac);    
+                            var lastSentName = sessionStorage.getItem(hbKey);
+                            var inQueue = window.nwKeepAliveQueue.find(function(q){ return q.mac === dev.mac; });
+                            
+                            // 没有发过，或者用户名跟上次不一样，更改
+                            if (lastSentName !== dev.name && !inQueue) { 
+                                sessionStorage.setItem(hbKey, dev.name); // 将现在的用户名作为指纹存入防刷缓存
+                                window.nwKeepAliveQueue.push({mac: dev.mac, name: dev.name});    
                                 processKeepAliveQueue();                  
                             }
                         };
@@ -1852,7 +1885,7 @@ return view.extend({
                     var mac = this.getAttribute('data-mac');
                     var ip = this.getAttribute('data-ip');
                     var dev = globalDevices.find(function(d){ return d.mac === mac; });
-                    if (dev.is_gw === 'true' || dev.is_gw === true || dev.is_local === 'true' || dev.is_local === true) return; // 系統設備不可點
+                    if (dev.is_gw === 'true' || dev.is_gw === true || dev.is_local === 'true' || dev.is_local === true) return; // 系统设备不可点
                     
                     var dName = dev.name === 'Unknown' ? mac.toUpperCase() : dev.name;
                     
@@ -1863,7 +1896,7 @@ return view.extend({
                         onOk: function(data) {
                             loadingEl.style.display = 'flex';
                             listEl.style.display = 'none'; catTabs.style.display = 'none';
-                            callFwSet(data.mac, data.ip, data.blk_en, data.iso_en, data.dmz_en)
+                            callFwSet(data.mac, data.ip, data.blk_en, data.iso_en, data.dmz_en, data.expose_en, data.expose_proto)
                             .then(function() { setTimeout(loadDevices, 2500); })
                             .catch(function(e) { 
                                 showCustomAlert(T['ERR_SAVE_FAIL_SHORT'].replace('{err}', e));
@@ -2457,6 +2490,14 @@ return view.extend({
         refreshBtn.addEventListener('click', function() {
             var icon = this.querySelector('.nd-refresh-icon');
             if(icon) { icon.style.transform = 'rotate(360deg)'; setTimeout(function(){ icon.style.transform = 'none'; }, 800); }
+            
+            // 手动点击刷新，清空所有心跳缓存！
+            Object.keys(sessionStorage).forEach(function(key) {
+                if (key.indexOf('nw_v6_hb_') === 0) {
+                    sessionStorage.removeItem(key);
+                }
+            });
+            
             loadDevices(true); // 主动Ping
         });
 

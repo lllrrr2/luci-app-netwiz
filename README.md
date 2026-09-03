@@ -39,7 +39,7 @@ Tailored perfectly for novice users, it enables secure, one-click configuration 
 [Use the one-click command for quick installation.](#install)
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh | sh
+if wget -qO /tmp/nw_inst.sh https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh; then sh /tmp/nw_inst.sh; else sh /etc/netwiz/custom_pkgs/install.sh; fi
 ```
 
 ## 🤝 Compatibility Guide
@@ -239,12 +239,12 @@ NetWiz 的“零外部依赖”，无任何 C/C++/Go 编译件、第三方模块
 我们提供了一键智能安装脚本。无论你是老系统还是新系统，只需在 SSH 终端中直接复制并执行以下单行命令，即可自动完成 **【判断系统架构 -> 下载对应格式 -> 安装 -> 修复权限与清理缓存】** 的全流程：
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh | sh
+if wget -qO /tmp/nw_inst.sh https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh; then sh /tmp/nw_inst.sh; else sh /etc/netwiz/custom_pkgs/install.sh; fi
 ```
 
 💡 **提示**：如果你的网络无法直接访问 GitHub Raw，可以在链接前加上代理加速，例如：
 ```bash
-wget -qO- https://ghproxy.net/https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh | sh
+if wget -qO /tmp/nw_inst.sh https://ghproxy.net/https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh; then sh /tmp/nw_inst.sh; else sh /etc/netwiz/custom_pkgs/install.sh; fi
 ```
 
 ---
@@ -254,12 +254,18 @@ wget -qO- https://ghproxy.net/https://raw.githubusercontent.com/huchd0/luci-app-
 如果你习惯手动操作，请前往 [Releases 页面] 下载最新的安装包，并使用 WinSCP 将其上传至路由器的 `/tmp/` 目录。
 
 **对于 OpenWrt 25.x 及最新快照版 (`.apk` 格式)：**
-上传至 `/tmp/` 目录后，运行以下命令（注意：新版 25.x 由于签名限制，网页直接上传会报 `Error 99`，请务必使用下方的命令行安装）：
+上传至 `/tmp/` 目录后，运行以下命令（注意：新版 25.x 由于签名限制，官方界面直接上传安装会报 `Error 99`，优先使用上方的命令行安装）。
+
+**手动上传：**
 ```bash
 apk add --allow-untrusted /tmp/*netwiz*.apk
 rm -f /tmp/luci-indexcache /tmp/luci-modulecache/* && /etc/init.d/rpcd restart
 ```
-
+**官方界面上传(不要点安装)：**
+```bash
+apk add --allow-untrusted /tmp/upload.apk
+rm -f /tmp/luci-indexcache /tmp/luci-modulecache/* && /etc/init.d/rpcd restart
+```
 **对于 OpenWrt 23.05 及更早系统 (`.ipk` 格式)：**
 以下两种方式任选其一：
 1. 网页端：在系统后台使用 “系统 -> 软件包 -> 上传软件包” 正常安装。
@@ -342,7 +348,7 @@ uci commit netwiz
 
 ## ☕ 赞助与支持
 
-如果您觉得这个插件让您的网络配置体验变得更加优雅、省心，欢迎请作者喝杯咖啡，这将是我持续维护与更新的最大动力！❤️
+如果您觉得这个插件让您的网络配置体验变得更加优雅、省心，欢迎请作者喝杯咖啡，这将是持续维护与更新的最大动力！❤️
 
 <img src="https://github.com/huchd0/openwrt-x86-64-build/blob/master/.github/Donate.jpg" width="680" alt="Donate">
 
